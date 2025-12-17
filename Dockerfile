@@ -19,7 +19,7 @@ COPY scripts /home/grip/scripts
 COPY build/libs/grip-media-management-system-*-SNAPSHOT.jar /home/grip/deploy/grip-media-management-system.jar
 RUN chmod +x /home/grip/scripts/startup.sh
 
-EXPOSE 18060
+EXPOSE 8090
 
 ARG phase
 ENV SPRING_PROFILES_ACTIVE=$phase
