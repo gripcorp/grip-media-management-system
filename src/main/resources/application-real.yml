@@ -79,13 +79,13 @@ ai.server.host: https://api-aibigdata.grip.studio
 
 aws:
   ivs:
-    region: ap-northeast-2
-    account-id: ${AWS_ACCOUNT_ID:}
-    channel-type: STANDARD
+    region: ${AWS_REGION:ap-northeast-2}
+    account-id: ${AWS_ACCOUNT_ID}
+    channel-type: ADVANCED_HD
     recording:
       enabled: true
       s3:
-        bucket: grip-ivs-recordings-prod
+        bucket: ${IVS_RECORDING_BUCKET}
       thumbnail:
         interval: 60
         storage: LATEST

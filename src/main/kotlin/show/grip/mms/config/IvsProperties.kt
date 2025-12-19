@@ -1,17 +1,22 @@
 package show.grip.mms.config
 
+import jakarta.validation.constraints.NotBlank
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
+import org.springframework.validation.annotation.Validated
 
 @Component
 @ConfigurationProperties(prefix = "aws.ivs")
+@Validated
 data class IvsProperties(
+    @field:NotBlank(message = "AWS Region은 필수입니다")
     var region: String = "ap-northeast-2",
+    @field:NotBlank(message = "AWS Account ID는 필수입니다")
     var accountId: String = "",
-    var channelType: String = "STANDARD",
-    var recording: Recording = Recording()
+    var channelType: String = "ADVANCED_HD",
+    var recording: RecordingConfig = RecordingConfig()
 ) {
-    data class Recording(
+    data class RecordingConfig(
         var enabled: Boolean = true,
         var s3: S3 = S3(),
         var thumbnail: Thumbnail = Thumbnail()
