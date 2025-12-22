@@ -30,7 +30,7 @@ class HealthController (
     @Value("\${aws.ivs.region}")
     private val ivsRegion: String,
 
-    @Value("\${aws.ivs.accountId}")
+    @Value("\${aws.ivs.account-id}")
     private val ivsAccountId: String,
 
     private val ivsClient: IvsClient
