@@ -57,28 +57,11 @@ pipeline {
                     script {
                         sh """
                             export GRADLE_USER_HOME=/home/jenkins/.gradle/${env.repoName}
-                            SHARED_GRADLE="/home/jenkins/.gradle"
+                            mkdir -p \${GRADLE_USER_HOME}
                             
-                            # 공유 캐시 디렉토리 생성 (없으면 생성)
-                            mkdir -p \${SHARED_GRADLE}/wrapper
-                            mkdir -p \${SHARED_GRADLE}/caches/modules-2
-                            mkdir -p \${GRADLE_USER_HOME}/caches
-                            
-                            # Gradle Wrapper 공유 (심볼릭 링크)
-                            if [ ! -L "\${GRADLE_USER_HOME}/wrapper" ]; then
-                                ln -sfn \${SHARED_GRADLE}/wrapper \${GRADLE_USER_HOME}/wrapper
-                            fi
-                            
-                            # 의존성 캐시 공유 (심볼릭 링크)
-                            if [ ! -L "\${GRADLE_USER_HOME}/caches/modules-2" ]; then
-                                ln -sfn \${SHARED_GRADLE}/caches/modules-2 \${GRADLE_USER_HOME}/caches/modules-2
-                            fi
-                            
-                            ./gradlew build -Pprofile=${env.appEnv} \\
-                                --info \\
+                            ./gradlew clean build -Pprofile=${env.appEnv} \\
                                 --build-cache \\
                                 --parallel \\
-                                --max-workers=4 \\
                                 --console=plain \\
                                 -Dorg.gradle.vfs.watch=false
                         """
@@ -183,3 +166,4 @@ pipeline {
                 }
     }
 }
+

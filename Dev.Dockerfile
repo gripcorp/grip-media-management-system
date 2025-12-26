@@ -24,3 +24,4 @@ EXPOSE 8090
 ARG phase
 ENV SPRING_PROFILES_ACTIVE=$phase
 ENTRYPOINT ["/home/grip/scripts/startup.sh", "grip-media-system.jar"]
+
