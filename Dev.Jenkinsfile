@@ -60,6 +60,7 @@ pipeline {
                             mkdir -p \${GRADLE_USER_HOME}
                             
                             ./gradlew clean build -Pprofile=${env.appEnv} \\
+                                --no-daemon \\
                                 --build-cache \\
                                 --parallel \\
                                 --console=plain \\
