@@ -14,6 +14,7 @@ pipeline {
         skipDefaultCheckout(true)
         ansiColor('xterm')
         timestamps()
+        disableConcurrentBuilds()
     }
 
     stages {
@@ -56,10 +57,8 @@ pipeline {
                 container('jdk21') {
                     script {
                         sh """
-                            export GRADLE_USER_HOME=/home/jenkins/.gradle/${env.repoName}
-                            mkdir -p \${GRADLE_USER_HOME}
-                            
                             ./gradlew clean build -Pprofile=${env.appEnv} \\
+                                --gradle-user-home=/home/jenkins/.gradle/${env.repoName} \\
                                 --no-daemon \\
                                 --build-cache \\
                                 --parallel \\
